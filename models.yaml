@@ -1,0 +1,18 @@
+# Routing registry for route_model.
+#
+# PLACEHOLDER — replace with the models/agents your harness actually uses.
+# Each entry: label (what the tool returns), criteria (what the decision
+# model reads to judge fit), and at most one `default: true` — the entry
+# returned when the decision abstains below its confidence threshold.
+# With no default marked, the first entry acts as default.
+models:
+  - label: fast-cheap # PLACEHOLDER
+    criteria: >-
+      short factual questions, summarization, simple lookups, casual chat —
+      anything where speed and cost matter more than depth
+    default: false
+  - label: slow-strong # PLACEHOLDER
+    criteria: >-
+      complex reasoning, code generation or review, long-document analysis,
+      math, multi-step planning, high-stakes answers
+    default: true

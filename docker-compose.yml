@@ -1,0 +1,18 @@
+# Dev compose for laya-mcp alone. book-to-rag's compose references the same
+# image with `build: ../laya-mcp`; laya-serve stays internal to the network.
+services:
+  laya-serve:
+    build: .
+    image: laya-mcp:latest
+    ports:
+      - "8090:8090"   # dev convenience for host-side checks; not required by consumers
+    restart: unless-stopped
+
+  laya-mcp:
+    image: laya-mcp:latest
+    depends_on:
+      - laya-serve
+    command: ["laya-mcp", "--transport", "http", "--host", "0.0.0.0", "--port", "8091"]
+    ports:
+      - "8091:8091"   # streamable-http MCP endpoint -> http://localhost:8091/mcp
+    restart: unless-stopped
